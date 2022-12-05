@@ -6,13 +6,13 @@
 :root {
   --original-main-width: min(80%, 1000px);
   --original-main-margin-left: calc((100% - var(--original-main-width)) / 2.75);
-  --original-right-side-bar-width: min(calc((100% - var(--moriginal-ain-width)) / 2), 400px);
+  --original-right-side-bar-width: min(calc((100% - var(--original-main-width)) / 2), 400px);
   --original-total-margin: max(1px, calc(100% - var(--original-main-width) - var(--original-right-side-bar-width)));
   --original-right-side-bar-margin-left: calc(50% + var(--main-width) / 2);
   --total-margin: max(0, calc(var(--original-total-margin) - max(0, calc(200px - var(--original-right-side-bar-width)))));
   --main-margin-left: var(--original-main-margin-left);
   --right-side-bar-margin-left: var(--original-right-side-bar-margin-left);
-  --right-side-bar-width: min(calc(100% - var(--total-margin) -  var(--main-width)), 400px);
+  --right-side-bar-width: var(--original-right-side-bar-width);
   --main-width: var(--original-main-width);
 }
 
