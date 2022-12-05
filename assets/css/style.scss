@@ -1,0 +1,95 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+:root {
+  --original-main-width: min(80%, 1000px);
+  --original-main-margin-left: calc((100% - var(--original-main-width)) / 2.75);
+  --original-right-side-bar-width: min(calc((100% - var(--moriginal-ain-width)) / 2), 400px);
+  --original-total-margin: max(1px, calc(100% - var(--original-main-width) - var(--original-right-side-bar-width)));
+  --original-right-side-bar-margin-left: calc(50% + var(--main-width) / 2);
+  --total-margin: max(0, calc(var(--original-total-margin) - max(0, calc(200px - var(--original-right-side-bar-width)))));
+  --main-margin-left: var(--original-main-margin-left);
+  --right-side-bar-margin-left: var(--original-right-side-bar-margin-left);
+  --right-side-bar-width: min(calc(100% - var(--total-margin) -  var(--main-width)), 400px);
+  --main-width: var(--original-main-width);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  box-sizing: border-box;
+  padding: 20px 40px;
+  width: var(--main-width);
+  margin-left: var(--main-margin-left);
+
+  line-height: 1.82;
+}
+
+#page_title {
+  box-sizing: border-box;
+  padding: 40px 40px;
+  text-align: center;
+}
+
+#right_side_bar {
+  box-sizing: border-box;
+  padding: min(20px, 10%) min(30px, 10%);
+  height: 100%;
+  overflow: auto;
+  margin-left: var(--right-side-bar-margin-left);
+  width: var(--right-side-bar-width);
+  position: fixed;
+}
+
+#right_side_bar_inner {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  width: max(200px, 100%);
+}
+
+img {
+  max-width: 100%;
+}
+
+* {
+  font-style: normal !important;
+}
+
+#meta_data {
+  font-size: small;
+  text-align: right;
+  line-height: 1.2;
+}
+#meta_data p {
+  margin-bottom: 4px;
+}
+
+h1 {
+  line-height: 1.3;
+}
+
+.info {
+  box-sizing: border-box;
+  background: #eafeef;
+  margin: 0px;
+  padding: 20px 20px 4px 20px;
+  margin-bottom: 10px;
+}
+
+.warn {
+  box-sizing: border-box;
+  background: #fff5d0;
+  margin: 0px;
+  padding: 20px 20px 4px 20px;
+  margin-bottom: 10px;
+}
+
+.highlight .k { color: #bb32ba; font-weight: normal; }
+.highlight .p { color: #85bb33; }
+
