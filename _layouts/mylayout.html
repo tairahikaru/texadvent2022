@@ -25,7 +25,12 @@
       </h1>
       <div id="meta_data">
         <p>{{ page.author }}</p>
-        <p>{{ page.date }}</p>
+        <p>
+          {{ page.date }}
+          {% if page.lastmodified %}
+            (updated {{ page.lastmodified }})
+          {% endif %}
+        </p>
       </div>
       {{content}}
       <script src="https://utteranc.es/client.js"
