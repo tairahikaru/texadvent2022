@@ -4,16 +4,21 @@
 @import "{{ site.theme }}";
 
 :root {
-  --original-main-width: min(80%, 1000px);
+  --original-main-width: max(min(77.5%, 1000px), 333px);
   --original-main-margin-left: calc((100% - var(--original-main-width)) / 2.75);
-  --original-right-side-bar-width: min(calc((100% - var(--original-main-width)) / 2), 400px);
+  --original-right-side-bar-width: min(calc((100% - var(--original-main-width)) / 2), 300px);
   --original-total-margin: max(1px, calc(100% - var(--original-main-width) - var(--original-right-side-bar-width)));
   --original-right-side-bar-margin-left: calc(50% + var(--main-width) / 2);
-  --total-margin: max(0, calc(var(--original-total-margin) - max(0, calc(200px - var(--original-right-side-bar-width)))));
-  --main-margin-left: var(--original-main-margin-left);
-  --right-side-bar-margin-left: var(--original-right-side-bar-margin-left);
-  --right-side-bar-width: var(--original-right-side-bar-width);
+  --total-margin: max(0px, calc(var(--original-total-margin) - max(0px, calc(300px - var(--original-right-side-bar-width)))));
+  --main-margin-left: max(0px, calc(var(--original-main-margin-left) - (var(--original-total-margin) - var(--total-margin))));
+  --original-two-right-side-bar-width: min(calc(100% - var(--total-margin) -  var(--main-width)), 300px);
+  --original-two-right-side-bar-margin-left: calc(var(--original-right-side-bar-margin-left) - ((var(--original-total-margin) - var(--total-margin)) - (var(--original-main-margin-left) - var(--main-margin-left))));
   --main-width: var(--original-main-width);
+  --right-side-bar-margin-left: max(
+    calc(var(--main-width) + var(--main-margin-left)),
+    calc(var(--original-two-right-side-bar-margin-left) - max(0px, calc(var(--original-two-right-side-bar-margin-left) + var(--original-two-right-side-bar-width) -  100%)))
+  );
+  --right-side-bar-width: min(600px, calc(100% - var(--right-side-bar-margin-left)));
 }
 
 body {
@@ -30,15 +35,29 @@ main {
   line-height: 1.82;
 }
 
+@media (min-width: 700px) {
+  main {
+    text-align: justify;
+  }
+  .markdown-body th, .markdown-body td {
+    text-align: justify !important;
+  }
+}
+@media (max-width: 600px) {
+  code {
+    word-break: break-all;
+  }
+}
+
 #page_title {
   box-sizing: border-box;
-  padding: 40px 40px;
+  padding: 20px;
   text-align: center;
 }
 
 #right_side_bar {
   box-sizing: border-box;
-  padding: min(20px, 10%) min(30px, 10%);
+  padding: min(20px, 10%) min(30px, calc(var(--right-side-bar-width) * 0.1));
   height: 100%;
   overflow: auto;
   margin-left: var(--right-side-bar-margin-left);
@@ -65,13 +84,14 @@ img {
   font-size: small;
   text-align: right;
   line-height: 1.2;
+  margin-bottom: 16px;
 }
 #meta_data p {
   margin-bottom: 4px;
 }
 
-h1 {
-  line-height: 1.3;
+.markdown-body h1 {
+  line-height: 1.5;
 }
 
 .info {
@@ -79,7 +99,8 @@ h1 {
   background: #eafeef;
   margin: 0px;
   padding: 20px 20px 4px 20px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .warn {
@@ -87,9 +108,74 @@ h1 {
   background: #fff5d0;
   margin: 0px;
   padding: 20px 20px 4px 20px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .highlight .k { color: #bb32ba; font-weight: normal; }
 .highlight .p { color: #85bb33; }
+
+th {
+  border-width: 0 !important;
+}
+.markdown-body table tr {
+  border: 1px solid;
+  border-width: 0 0 0.01em 0;
+  background-color: white;
+}
+.markdown-body table tr:last-child {
+  border: 1px solid;
+  border-width: 0 0 0.08em 0 ;
+}
+td {
+  border-width: 0 !important;
+  background-color: white !important;
+}
+
+@media (min-width :800px) {
+  td:nth-child(1), th:nth-child(1) {
+    white-space: nowrap;
+  }
+}
+
+table, .markdown-body table {
+  overflow: auto;
+  box-sizing: border-box;
+  width: max(100%, 370px);
+  margin: 32px 0 48px;
+}
+
+.markdown-body table th, .markdown-body table td {
+  padding: 6px 16px;
+}
+
+.markdown-body hr {
+  overflow: visible;
+  text-align: center;
+  margin: 48px 0;
+  background-color: white;
+}
+.markdown-body hr:after {
+  background: white;
+  content: '＊　＊　＊';
+  top: -12px;
+  position: relative;
+  display: inline;
+}
+
+#right_side_bar ul {
+  padding-left: 1em;
+  list-style: circle;
+}
+
+summary {
+  margin-bottom: 10px;
+}
+details {
+  margin: 0 1em 0;
+}
+
+.utterances {
+  max-width: 100% !important
+}
 
