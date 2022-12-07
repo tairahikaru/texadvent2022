@@ -1,18 +1,31 @@
 ---
 htmltitle: |
-  <code>\NewDocumentCommand</code> さえあればいい<br>
+  <code>\NewDocumentCommand</code> さえあればいい。<br>
   〜TeX 言語に手を出してしまう前に〜
-title: \NewDocumentCommand さえあればいい
+title: \NewDocumentCommand さえあればいい。
 author: thth
 date: 2022-12-06
+lastmodified: 2022-12-08
 source: https://github.com/tairahikaru/texadvent2022/blob/main/index.md
 layout: mylayout
+documentclass: bxjsarticle
+classoption: pandoc
+toc: true
+colorlinks: true
+header-includes: |
+  \usepackage{newunicodechar,xparse}
+  \newunicodechar{⟨}{\meta}
+  \NewDocumentCommand\meta{u{⟩}}{$\langle\mbox{#1}\rangle$}
+  \title{\texttt{\symbol{`\\}NewDocumentCommand} さえあればいい。}
+  \renewcommand{\title}[1]{}
 ---
 
 {% raw %}
 
 これは、「[TeX & LaTeX Advent Calendar 2022](https://adventar.org/calendars/7868)」の 6 日目の記事です。
 昨日は[『スペースにまつわるエトセトラ』（ut さん）](http://texuttex.g2.xrea.com/AdventCal2022.html)でした。
+明日はは [CareleSmith9](http://circle9tym.blog.fc2.com/) さんです。
+明後日の記事として追記『[`\UseName` でもエラーが出したい！][scope]』を書きました。
 
 今年の重点テーマは「やっぱりTeX言語(とか)しましょう！」です。
 投稿された記事を読んでいて、「やっぱり TeX 言語は難しい」と思っている方も多いと思います。
@@ -20,7 +33,7 @@ layout: mylayout
 
 この記事では、最近 LaTeX に追加された新機能である `\NewDocumentCommand` や関連した命令を用いて、複雑な命令を作る方法を解説していきます。
 難解な TeX 言語や expl3 の知識は一切不要です。
-追加パッケージも使わず、LaTeX が文書作成者（authors）向けに標準で提供している機能のみを用いて説明していきますのでご安心ください。
+追加パッケージも使わず、LaTeX が文書作成者（author）向けに標準で提供している機能のみを用いて説明していきますのでご安心ください。
 具体的には、以下のレベルの読者を対象としています：
 
 - LaTeX で基本的な日本語文書が作れる
@@ -119,8 +132,6 @@ xparse パッケージは従来より次世代 LaTeX の一環として開発さ
 
 </details>
 
-<p></p>
-
 ちょっと複雑な命令を作ってライバルに差をつけよう！
 
 # 復習　`\newcommand` の使い方
@@ -131,7 +142,7 @@ xparse パッケージは従来より次世代 LaTeX の一環として開発さ
 
 ## 置き換えと最左戦略
 
-`\newcommand` などによって定義された命令（Command）は、その命令が見つかるとその定義に置き換えられます。
+`\newcommand` などによって定義された命令（command）は、その命令が見つかるとその定義に置き換えられます。
 これは、単純な置き換えです。
 いったいどういうことでしょうか。例を見てみましょう。
 
@@ -522,11 +533,11 @@ LaTeX の標準の文書作成者向けの機能のみを使っている場合�
 % #1 <- 金
 
 \ruby{金}{ゴミ}\GomiRubyI{権力}に用はない！
-% \GomiRubyI を置き換えます
+% \GomiRubyI を置き換える
 % #1 <- 権力
 
 \ruby{金}{ゴミ}\ruby{権力}{ゴミ}\GomiRubyI に用はない！
-% \GomiRubyI を置き換えます
+% \GomiRubyI を置き換える
 % #1 <- に
 
 \ruby{金}{ゴミ}\ruby{権力}{ゴミ}\ruby{に}{ゴミ}\GomiRubyI 用はない！
@@ -542,7 +553,7 @@ LaTeX の標準の文書作成者向けの機能のみを使っている場合�
 </div>
 
 意図しない「に」にまでルビが振られてしまいます。
-それどころかこのループは空行か `\par` かファイルの終わりまで続き、しまいにはエラーを出すことでしょう。
+それどころかこのループは空行か `\par` かファイルの終わりか別の命令まで続き、しまいにはエラーを出すことでしょう。
 無限ループにしないために、条件分岐を用いてループすべき部分が終わったことを検出する必要があります。
 
 ここでは `s` という引数指定子を用いて条件分岐をしましょう。
@@ -1005,8 +1016,8 @@ p と d を使ったのは、日本語のカギカッコ `「」` みたいだ�
 これは「この引数が長い引数を受け付けるようにする」という指定です。
 もちろん `m` 以外の任意の引数指定子に使えます。
 
-- 長い引数：空行または `\par` を含む引数
-- 短い引数：空行と `\par` のどちらも含まない引数
+- 長い引数（long argument）：空行または `\par` を含む引数
+- 短い引数（short argument）：空行と `\par` のどちらも含まない引数
 
 `+` を付けなかった場合は短い引数しか受け付けません。
 
@@ -1019,7 +1030,7 @@ p と d を使ったのは、日本語のカギカッコ `「」` みたいだ�
 たとえば、
 
 ```latex
-\NewDocumentEnvironment \ShowArgument { +m }
+\NewDocumentCommand \ShowArgument { +m }
 \ShowArgument {引数
 
 \ShowArgument {引数}
@@ -1168,6 +1179,8 @@ p と d を使ったのは、日本語のカギカッコ `「」` みたいだ�
 
 `\UseName` や `\ExpandArgs` で命令化する文字列はミスがないように注意してください。
 
+2022-12-08 追記：副作用を解決する方法を『[`\UseName` でもエラーが出したい！][scope]』に書きました。
+
 <div markdown="block" class="warn">
 
 `\UseName` や `\ExpandArgs` を用いると通常文書作成者がアクセスできないような命令（名前に `@` や `:` や `_` を含む命令）を使えますが、何が起こるのか知らないうちは、これを行うべきではありません。
@@ -1262,7 +1275,7 @@ p と d を使ったのは、日本語のカギカッコ `「」` みたいだ�
 - ルビの前後に余計な空白が入っている
 
 順番に解決していきましょう。
-なお、親文字とルビの長い方に長さを揃えるために短い方に均等に空白を入れること（均等割といいます）については[次節][均等割]で扱います。
+なお、親文字とルビの長い方に長さを揃えるために短い方に均等に空白を入れること（「均等割」といいます）については[次節][均等割]で扱います。
 
 ### 親文字と段落の別の文字の上下方向の位置がずれてる
 
@@ -1308,7 +1321,7 @@ TeX で使われる単位 `em` は普通は現在のフォントサイズと同�
 
 <div markdown="block" class="info">
 
-`\fontsize`、`\selectfont` は他にどうしようもないので使ってしまいましたが、本来は開発者（class and package writers）向けの機能です。
+`\fontsize`、`\selectfont` は他にどうしようもないので使ってしまいましたが、本来は開発者（class and package writer）向けの機能です。
 どうしても文書作成者向けの機能のみを使いたければ `\tiny` で標準フォントサイズ（`\normalsize`）の半分の大きさになることが期待できますが、親文字の大きさにかかわらずルビの大きさが固定されてしまいます。
 
 </div>
@@ -2573,7 +2586,7 @@ FizzBuzz の実装ができたら、こんどは以下の要件を満たす命�
 以下のコードブロックで完結してます。
 
 ```latex
-%% `\NewDocumentCommand` さえあればいい
+%% `\NewDocumentCommand` さえあればいい。
 %% パブリックドメイン・無保証
 \RequirePackage{plautopatch}
 % 一応 pdfLaTeX 以外の主要エンジンであればどれでも通るようにしてある
@@ -2977,6 +2990,7 @@ FizzBuzz の実装ができたら、こんどは以下の要件を満たす命�
 
 [-NoValue-]: #指定された位置までとってくる
 [均等割]: #均等割
+[scope]: scope.html
 
 {% endraw %}
 
