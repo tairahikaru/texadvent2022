@@ -75,7 +75,8 @@ main {
 @media (max-width: 500px) {
   #right_side_bar {
     background: #f9f9fe;
-    height: min(100%, max(300px, 77%));
+    height: min(100%, max(300px, 70%));
+    font-size: 9px;
   }
 }
 
