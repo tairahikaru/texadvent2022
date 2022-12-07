@@ -5,7 +5,7 @@ htmltitle: |
 title: \NewDocumentCommand さえあればいい。
 author: thth
 date: 2022-12-06
-lastmodified: 2022-12-08
+lastmodified: '2022-12-08 patch level 1'
 source: https://github.com/tairahikaru/texadvent2022/blob/main/index.md
 layout: mylayout
 documentclass: bxjsarticle
@@ -24,7 +24,7 @@ header-includes: |
 
 これは、「[TeX & LaTeX Advent Calendar 2022](https://adventar.org/calendars/7868)」の 6 日目の記事です。
 昨日は[『スペースにまつわるエトセトラ』（ut さん）](http://texuttex.g2.xrea.com/AdventCal2022.html)でした。
-明日はは [CareleSmith9](http://circle9tym.blog.fc2.com/) さんです。
+明日は [CareleSmith9](http://circle9tym.blog.fc2.com/) さんです。
 明後日の記事として追記『[`\UseName` でもエラーが出したい！][scope]』を書きました。
 
 今年の重点テーマは「やっぱりTeX言語(とか)しましょう！」です。
