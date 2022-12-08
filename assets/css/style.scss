@@ -229,6 +229,13 @@ details {
   a {
     color: #93c6ff;
   }
+  .markdown-body code a, .markdown-body a code {
+    color: #93c6ff;
+  }
+
+  .markdown-body img {
+    filter: brightness(87%);
+  }
 
   .info {
     background: #182b1f;
