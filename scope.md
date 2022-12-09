@@ -1,10 +1,17 @@
 ---
+title: \UseName でもエラーが出したい！
 htmltitle: |
   <code>\UseName</code> でもエラーが出したい！
-title: \UseName でもエラーが出したい！
 author: thth
+description: |
+  \UseName や \ExpandArgs は文字列を命令化する LaTeX2e の新機能ですが、副作用があるのをご存知ですか？
+  命令が未定義であればエラーを出す \MyUseName を作ります。
+lang: ja
 date: 2022-12-08
+lastmodified: '2022-12-09'
+tag: LaTeX
 source: https://github.com/tairahikaru/texadvent2022/blob/main/scope.md
+license: https://creativecommons.org/licenses/by-sa/4.0/
 layout: mylayout
 documentclass: bxjsarticle
 classoption: pandoc
@@ -24,9 +31,13 @@ header-includes: |
 この記事単体でも読めるようになっています。
 
 これ自体は 8 日目の記事です。
-昨日は [CareleSmith9](http://circle9tym.blog.fc2.com/) さんで、明日は [zr_tex8r](https://twitter.com/zr_tex8r) さんです。
+昨日は [CareleSmith9 さん](http://circle9tym.blog.fc2.com/)で、明日は『[ZR🙃的TeXまめちしき](https://twitter.com/zr_tex8r/status/1601158897670455296)』（zr_tex8r さん）です。
 
 `\newcommand`、`\newenvironment` の使い方はわかっている前提です。
+
+TeX Live 2022 以降の LaTeX を前提としています。
+コードブロックではプリアンブルなどは省略します。
+適宜補ってください。
 
 この記事は [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)、コードの部分はパブリックドメイン・無保証です。
 
@@ -130,7 +141,7 @@ LaTeX が提供する命令には、局所化の影響を受けないものも�
 
 # 局所化をバラバラに
 
-`\MyUseName` の実装方針が決まったので、何も考えずに `{}` を使ってとりあえずこんなコードを書いてみました：
+`\MyUseName` の実装方針が決まったので、なにも考えずに `{}` を使ってとりあえずこんなコードを書いてみました：
 
 ```latex
 \newcommand{\MyUseName}[1]{%
@@ -173,7 +184,7 @@ LaTeX が提供する命令には、局所化の影響を受けないものも�
 \mycommand %   -> foo
 ```
 
-`\renewcommand` が環境の中だけに影響しているのが分かります。
+`\renewcommand` が環境の中だけに影響しているのがわかります。
 
 `{}` の代わりに `\begin{Empty}\end{Empty}` を使うことにして、先ほどの `\MyUseName` を書き直します。
 
@@ -234,6 +245,9 @@ LaTeX が提供する命令には、局所化の影響を受けないものも�
 `\MyUseName` にオプション引数をつけました。
 これで、`\MyUseName[⟨別の命令⟩]{⟨文字列⟩}` とすると `⟨別の命令⟩\⟨文字列⟩` に置き換えられるようになります。
 
+`⟨別の命令⟩` は単体の命令である必要はなく、引数などをつけたもの（たとえば `\newcommand*`）だったとしても構いません。
+ただし、`[]` のカッコを含む場合は引数全体を `{}` で包む必要があります（詳しくは[本編][本編#オプション引数の性質]へ）。
+
 # おわり
 
 普通の LaTeX ユーザであれば、うっかりスペルミスをしてもエラーが出てくれる `\MyUseName` の方が使い勝手がよいのではないでしょうか。
@@ -241,6 +255,7 @@ LaTeX が提供する命令には、局所化の影響を受けないものも�
 TeX 言語や expl3 に手を出すつもりのない人は、諦めるか `\MyUseName` と [`\NewDocumentCommand`][本編] で頑張りましょう。
 
 [本編]: .
+[本編#オプション引数の性質]: .#オプション引数の性質
 
 {% endraw %}
 
