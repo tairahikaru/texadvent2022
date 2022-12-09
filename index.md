@@ -1,13 +1,19 @@
 ---
-htmltitle: |
-  <code>\NewDocumentCommand</code> さえあればいい。<br>
-  〜TeX 言語に手を出してしまう前に〜
 title: \NewDocumentCommand さえあればいい。
+htmltitle: |
+  <code>\NewDocumentCommand</code> さえあればいい。
+subtitle: 〜TeX 言語に手を出してしまう前に〜
+description: |
+  \NewDocumentCommand を使い尽くして君だけの命令を作ろう！
+  TeX Live 2022 で使える LaTeX2e の新機能を説明しながら高性能な命令を定義する方法を解説します。
 author: thth
+lang: ja
 date: 2022-12-06
-lastmodified: '2022-12-08 patch level 1'
+lastmodified: '2022-12-09'
 source: https://github.com/tairahikaru/texadvent2022/blob/main/index.md
+license: https://creativecommons.org/licenses/by-sa/4.0/
 layout: mylayout
+tag: LaTeX, xparse
 documentclass: bxjsarticle
 classoption: pandoc
 toc: true
@@ -23,7 +29,7 @@ header-includes: |
 {% raw %}
 
 これは、「[TeX & LaTeX Advent Calendar 2022](https://adventar.org/calendars/7868)」の 6 日目の記事です。
-昨日は[『スペースにまつわるエトセトラ』（ut さん）](http://texuttex.g2.xrea.com/AdventCal2022.html)でした。
+昨日は『[スペースにまつわるエトセトラ](http://texuttex.g2.xrea.com/AdventCal2022.html)』（ut さん）でした。
 明日は [CareleSmith9](http://circle9tym.blog.fc2.com/) さんです。
 明後日の記事として追記『[`\UseName` でもエラーが出したい！][scope]』を書きました。
 
@@ -70,7 +76,7 @@ xparse パッケージは従来より次世代 LaTeX の一環として開発さ
 ```
 
 コード中で `⟨⟩` というカッコを用いることがあります。
-この場合は、コードに実際に `⟨⟩` を書くわけでは**ありません**。
+この場合は、コードに実際に `⟨⟩` を書くわけ**ではありません**。
 `⟨説明⟩` という記述は、「コードのその場所には `説明` に当てはまるような内容の任意のものが入りうる」ということを意味します。
 たとえば、`\newcommand{⟨命令⟩}{⟨定義⟩}` という記述は、`\newcommand` の第 1 引数には命令が、第 2 引数には定義が入るということを意味します。
 実際には `⟨命令⟩` や `⟨定義⟩` の意味については、すぐ後の本文で説明されることが多いでしょう。
@@ -486,7 +492,7 @@ LaTeX の標準の文書作成者向けの機能のみを使っている場合�
 `-NoValue-` マーカについては[後で][-NoValue-]説明します。
 
 もうおわかりですね。`\spacedruby` では引数プロセッサとして `\SplitList{ }` を指定することで、引数を空白区切りで分割します。
-もちろんこれだけでは不十分で、以下の課題を解決する必要があります
+もちろんこれだけでは不十分で、以下の課題を解決する必要があります：
 
 - 引数が何個の要素に分割されるかわからない
 - 親文字とルビについて、分割された要素のそれぞれの先頭を同時にとってきて `\ruby` の引数に入れなければならない
@@ -503,7 +509,7 @@ LaTeX の標準の文書作成者向けの機能のみを使っている場合�
 
 以下のような命令 `\GomiRuby` を作ってみましょう：
 
-- `\GomiRuby{⟨親文字リスト⟩}` は、`⟨親文字リスト⟩` を空白で分割したそれぞれの `⟨親文字⟩` に対して、`\ruby{⟨親文字⟩}{ゴミ}` としたのと同じ結果を得る。
+- `\GomiRuby{⟨親文字リスト⟩}` は、`⟨親文字リスト⟩` を空白で分割したそれぞれの `⟨親文字⟩` に対して、`\ruby{⟨親文字⟩}{ゴミ}` としたのと同じ結果を得る
 
 繰り返しを行うには、命令を再帰的にします。
 再帰的とは、命令を定義に置き換えていったときにその命令がまた現れるということです。
@@ -1180,6 +1186,7 @@ p と d を使ったのは、日本語のカギカッコ `「」` みたいだ�
 `\UseName` や `\ExpandArgs` で命令化する文字列はミスがないように注意してください。
 
 2022-12-08 追記：副作用を解決する方法を『[`\UseName` でもエラーが出したい！][scope]』に書きました。
+もちろん LaTeX の一般文書作成者向けの機能しか使ってません。
 
 <div markdown="block" class="warn">
 
@@ -2056,7 +2063,7 @@ Document Class: jsarticle 2022/09/13 jsclasses (okumura, texjporg)
 
 <div markdown="block" class="info">
 
-`\detokenize` は LaTeX の機能では**ありません**。
+`\detokenize` は LaTeX の機能**ではありません**。
 デバッグ用で、コード本体には一切使っていないので許してください。
 一応 `\ShowDocumentCommandArgSpec` とオプション引数の既定値を使ってコンソールに表示するというのも考えたのですが、いちいち TeX の動作が止まるのが嫌でやめました。
 
