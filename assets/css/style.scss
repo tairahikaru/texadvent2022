@@ -255,7 +255,7 @@ details {
     color: #93c6ff;
   }
 
-  .markdown-body img {
+  .markdown-body img, .utterances {
     filter: brightness(87%);
   }
 
@@ -286,5 +286,6 @@ details {
   .highlight .na {
     color: #30b0c0;
   }
+
 }
 
