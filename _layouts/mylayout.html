@@ -45,6 +45,9 @@
         </p>
       </div>
       {{content}}
+      {% if page.comment %}
+        <h1><a href="{{ page.comment }}">コメント</a></h1>
+      {% endif %}
       <script src="https://utteranc.es/client.js"
               repo="tairahikaru/texadvent2022"
               issue-term="pathname"
