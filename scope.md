@@ -8,7 +8,7 @@ description: |
   命令が未定義であればエラーを出す \MyUseName を作ります。
 lang: ja
 date: 2022-12-08
-lastmodified: '2022-12-09'
+lastmodified: '2022-12-26'
 tag: LaTeX
 source: https://github.com/tairahikaru/texadvent2022/blob/main/scope.md
 license: https://creativecommons.org/licenses/by-sa/4.0/
@@ -27,11 +27,11 @@ header-includes: |
 
 {% raw %}
 
-これは、「[TeX & LaTeX Advent Calendar 2022](https://adventar.org/calendars/7868)」の 6 日目の記事『[`\NewDocumentCommand` さえあればいい。][本編]』を投稿したあとに思いついた話です。
+これは、「[TeX & LaTeX Advent Calendar 2022](https://adventar.org/calendars/7868)」の 6 日目の記事『[`\NewDocumentCommand` さえあればいい。][本編]』を投稿した後に思いついた話です。
 この記事単体でも読めるようになっています。
 
 これ自体は 8 日目の記事です。
-昨日は [CareleSmith9 さん](http://circle9tym.blog.fc2.com/)で、明日は『[ZR🙃的TeXまめちしき](https://twitter.com/zr_tex8r/status/1601158897670455296)』（zr_tex8r さん）です。
+昨日は『[TikZ で名刺作り](http://circle9tym.blog.fc2.com/blog-entry-416.html)』（CareleSmith9 さん）で、明日は『[ZR🙃的TeXまめちしき](https://twitter.com/zr_tex8r/status/1601158897670455296)』（zr_tex8r さん）です。
 
 `\newcommand`、`\newenvironment` の使い方はわかっている前提です。
 
