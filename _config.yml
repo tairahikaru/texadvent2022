@@ -2,4 +2,3 @@ plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
   - jekyll-feed
-baseurl: "/texadvent2022"
